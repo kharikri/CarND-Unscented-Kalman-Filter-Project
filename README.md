@@ -7,6 +7,7 @@ In this project we fuse the Lidar and Radar measurements to estimate the positio
 
 The process noise parameters for longitudinal and yaw acceleration were tuned to get lower the RMSE. I also used NIS distribution to select these parameters. The NIS distribution for the chosen parameters is shown below:
 
+![alt text](https://github.com/kharikri/CarND-Unscented-Kalman-Filter-Project/blob/master/NISChart.png)
 
 I implemented this project in C++.
 
