@@ -5,6 +5,9 @@ This is the second project in the second term of the Self Driving Car Nanodegree
 
 In this project we fuse the Lidar and Radar measurements to estimate the position of objects on the road such as pedestrains, bicycles, other cars, etc. This project uses Unscented Kalman Filters for prediction and update. Here we assume the vehicle is moving with a constant velocity and can also turn.
 
+The process noise parameters for longitudinal and yaw acceleration were tuned to get lower the RMSE. I also used NIS distribution to select these parameters. The NIS distribution for the chosen parameters is shown below:
+
+
 I implemented this project in C++.
 
 The following gives details on how to run the code:
