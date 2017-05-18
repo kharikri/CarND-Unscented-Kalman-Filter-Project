@@ -65,6 +65,12 @@ public:
   ///* Augmented state dimension
   int n_aug_;
 
+  //set measurement dimension, radar can measure r, phi, and r_dot
+  int n_z_radar_;
+
+  //set measurement dimension, lidar can measure px and py
+  int n_z_laser_;
+
   ///* Sigma point spreading parameter
   double lambda_;
 
@@ -73,6 +79,12 @@ public:
 
   ///* the current NIS for laser
   double NIS_laser_;
+
+  // lidar noise covariance matrix
+  MatrixXd R_laser_;
+
+  // radar noise covariance matrix
+  MatrixXd R_radar_;
 
   /**
    * Constructor
@@ -108,6 +120,15 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
+
+  //Support functions
+  void SigmaPointPrediction(MatrixXd Xsig_aug, double delta_t);
+  void PredictMeanAndCovariance();
+  void AugmentedSigmaPoints(MatrixXd* Xsig_out);
+  void PredictLaserMeasurement(VectorXd* z_out, MatrixXd* S_out, MatrixXd* Zsig_out);
+  void PredictRadarMeasurement(VectorXd* z_out, MatrixXd* S_out, MatrixXd* Zsig_out);
+  void UpdateStateAfterLaserMeasurement(VectorXd z_out, MatrixXd S_out, MatrixXd Zsig_out, MeasurementPackage meas_package);
+  void UpdateStateAfterRadarMeasurement(VectorXd z_out, MatrixXd S_out, MatrixXd Zsig_out, MeasurementPackage meas_package);
 };
 
 #endif /* UKF_H */

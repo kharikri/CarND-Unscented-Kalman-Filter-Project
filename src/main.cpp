@@ -73,6 +73,7 @@ int main(int argc, char* argv[]) {
 
   // prep the measurement packages (each line represents a measurement at a
   // timestamp)
+  int i = 0;
   while (getline(in_file_, line)) {
     string sensor_type;
     MeasurementPackage meas_package;
@@ -140,7 +141,6 @@ int main(int argc, char* argv[]) {
   // frame)
 
   size_t number_of_measurements = measurement_pack_list.size();
-
   // column names for output file
   out_file_ << "time_stamp" << "\t";  
   out_file_ << "px_state" << "\t";
@@ -157,10 +157,8 @@ int main(int argc, char* argv[]) {
   out_file_ << "vx_ground_truth" << "\t";
   out_file_ << "vy_ground_truth" << "\n";
 
-
   for (size_t k = 0; k < number_of_measurements; ++k) {
-    // Call the UKF-based fusion
-    ukf.ProcessMeasurement(measurement_pack_list[k]);
+	  ukf.ProcessMeasurement(measurement_pack_list[k]);
 
     // timestamp
     out_file_ << measurement_pack_list[k].timestamp_ << "\t"; // pos1 - est
@@ -216,7 +214,6 @@ int main(int argc, char* argv[]) {
     
     estimations.push_back(ukf_x_cartesian_);
     ground_truth.push_back(gt_pack_list[k].gt_values_);
-
   }
 
   // compute the accuracy (RMSE)
@@ -233,5 +230,6 @@ int main(int argc, char* argv[]) {
   }
 
   cout << "Done!" << endl;
+
   return 0;
 }
