@@ -20,6 +20,6 @@ The following gives details on how to run the code:
 
 1. Clone this repo.
 2. Make a build directory: `mkdir build && cd build`
-3. Compile: `cmake .. && make`
+3. Compile: `cmake .. -G "Unix Makefiles" && make`
 4. Run it: `./UnscentedKF path/to/input.txt path/to/output.txt`. 
 
